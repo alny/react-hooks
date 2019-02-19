@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Tasks = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = async () => {
+    const result = await axios("http://localhost:57422/api/projects/1/tasks");
+    setTasks(result.data);
+    console.log(result.data);
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   return (
     <section className="content">
       <div className="container">
@@ -17,9 +30,9 @@ const Tasks = () => {
                   </a>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="javascript:void(0);">Charts</a>
+                  <a href="#">Projects</a>
                 </li>
-                <li className="breadcrumb-item active">Editable Tables</li>
+                <li className="breadcrumb-item active">Projects Tasks</li>
               </ul>
             </div>
           </div>
@@ -29,13 +42,13 @@ const Tasks = () => {
             <div className="card">
               <div className="header">
                 <h2>
-                  <strong>Edit</strong> Projects Tasks
+                  <strong>Projects Tasks</strong>
                 </h2>
                 <ul className="header-dropdown">
                   <li className="dropdown">
                     {" "}
                     <a
-                      href="javascript:void(0);"
+                      href="#"
                       className="dropdown-toggle"
                       data-toggle="dropdown"
                       role="button"
@@ -47,16 +60,16 @@ const Tasks = () => {
                     </a>
                     <ul className="dropdown-menu dropdown-menu-right">
                       <li>
-                        <a href="javascript:void(0);">Action</a>
+                        <a href="#">Action</a>
                       </li>
                       <li>
-                        <a href="javascript:void(0);">Another action</a>
+                        <a href="#">Another action</a>
                       </li>
                       <li>
-                        <a href="javascript:void(0);">Something else</a>
+                        <a href="#">Something else</a>
                       </li>
                       <li>
-                        <a href="javascript:void(0);" className="boxs-close">
+                        <a href="#" className="boxs-close">
                           Delete
                         </a>
                       </li>
@@ -69,7 +82,7 @@ const Tasks = () => {
                   <div className="col-md-12">
                     <button className="btn btn-default pull-right add-row">
                       <i className="fa fa-plus" />
-                      &nbsp;&nbsp; Add Row
+                      &nbsp;&nbsp; Add Task
                     </button>
                   </div>
                 </div>
@@ -78,72 +91,45 @@ const Tasks = () => {
                     <table className="table table-bordered" id="editableTable">
                       <thead>
                         <tr>
+                          <th>Id</th>
                           <th>Name</th>
-                          <th>Birthday</th>
-                          <th>Age</th>
-                          <th>Sex</th>
+                          <th>Description</th>
+                          <th>Duration</th>
+                          <th>Created At</th>
                           <th>Edit</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr data-id="1">
-                          <td data-field="name">Dave Gamache</td>
-                          <td data-field="birthday">May 19, 2015</td>
-                          <td data-field="age">26</td>
-                          <td data-field="sex">Male</td>
-                          <td>
-                            <a
-                              className="button button-small edit"
-                              title="Edit"
-                            >
-                              <i className="zmdi zmdi-edit" />
-                            </a>
+                        {tasks.length === 0
+                          ? null
+                          : tasks.map((t, i) => {
+                              return (
+                                <tr data-id={t.Id}>
+                                  <td data-field="id">{t.Id}</td>
+                                  <td data-field="name">{t.Name}</td>
+                                  <td data-field="description">
+                                    {t.Description}
+                                  </td>
+                                  <td data-field="duration">{t.Duration}</td>
+                                  <td data-field="createdAt">{t.Created}</td>
+                                  <td>
+                                    <a
+                                      className="button button-small edit"
+                                      title="Edit"
+                                    >
+                                      <i className="zmdi zmdi-edit" />
+                                    </a>
 
-                            <a
-                              className="button button-small edit"
-                              title="Delete"
-                            >
-                              <i className="zmdi zmdi-delete" />
-                            </a>
-                          </td>
-                        </tr>
-                        <tr data-id="2">
-                          <td data-field="name">Dwayne Johnson</td>
-                          <td data-field="birthday">May 19, 2015</td>
-                          <td data-field="age">42</td>
-                          <td data-field="sex">Male</td>
-                          <td>
-                            <a
-                              className="button button-small edit"
-                              title="Edit"
-                            >
-                              <i className="zmdi zmdi-edit" />
-                            </a>{" "}
-                            <a
-                              className="button button-small edit"
-                              title="Delete"
-                            >
-                              <i className="zmdi zmdi-delete" />
-                            </a>
-                          </td>
-                        </tr>
-                        <tr data-id="3">
-                          <td data-field="name">Halyna Nadia</td>
-                          <td data-field="birthday">May 25, 2015</td>
-                          <td data-field="age">22</td>
-                          <td data-field="sex">Female</td>
-                          <td>
-                            <a
-                              className="button button-small edit"
-                              title="Edit"
-                            >
-                              <i className="zmdi zmdi-edit" />
-                            </a>{" "}
-                            <a className="button button-small" title="Delete">
-                              <i className="zmdi zmdi-delete" />
-                            </a>
-                          </td>
-                        </tr>
+                                    <a
+                                      className="button button-small edit"
+                                      title="Delete"
+                                    >
+                                      <i className="zmdi zmdi-delete" />
+                                    </a>
+                                  </td>
+                                </tr>
+                              );
+                            })}
                       </tbody>
                     </table>
                   </div>

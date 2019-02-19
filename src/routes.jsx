@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Projects from "./components/Projects";
 import Tasks from "./components/Tasks";
 import Developers from "./components/Developers";
+import Customers from "./components/Customers";
 
 import Navbar from "./components/Layout";
 
@@ -17,6 +18,7 @@ const Routes = () => {
           <Route path="/projects" component={Projects} />
           <Route path="/tasks" component={Tasks} />
           <Route path="/developers" component={Developers} />
+          <Route path="/customers" component={Customers} />
           <Route component={() => <div>Not Found</div>} />
         </Switch>
       </>

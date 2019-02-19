@@ -70,10 +70,7 @@ const Navbar = () => {
                   <Link to="/developers">Developers</Link>
                 </li>
                 <li>
-                  <a href="#">Customers</a>
-                </li>
-                <li>
-                  <Link to="/tasks">Tasks</Link>
+                  <Link to="/customers">Customers</Link>
                 </li>
               </ul>
             </div>

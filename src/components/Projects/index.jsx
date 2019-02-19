@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -20,83 +21,113 @@ const Projects = () => {
         <div className="block-header">
           <div className="row clearfix">
             <div className="col-lg-5 col-md-5 col-sm-12">
-              <h2>Task Board</h2>
+              <h2>Projects List</h2>
             </div>
             <div className="col-lg-7 col-md-7 col-sm-12">
               <ul className="breadcrumb float-md-right padding-0">
                 <li className="breadcrumb-item">
-                  <a href="#">
+                  <a href="index.html">
                     <i className="zmdi zmdi-home" />
                   </a>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="#">Test</a>
+                  <a href="javascript:void(0);">Pages</a>
                 </li>
-                <li className="breadcrumb-item active">Projects:</li>
+                <li className="breadcrumb-item active">Projects List</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="row clearfix">
-          {projects.length === 0
-            ? null
-            : projects.map((p, i) => {
-                return (
-                  <div key={i} className="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                    <div className="card">
-                      <div className="body">
-                        <h6 className="m-b-15">{p.Name}</h6>
-                        <p>Project ID: {p.Id}</p>
-                        <ul className="list-unstyled team-info m-t-20">
-                          <li className="m-r-15">
-                            <small className="text-muted">Team</small>
-                          </li>
-                          <li>
-                            <img
-                              src="assets/images/xs/avatar10.jpg"
-                              title="Avatar"
-                              alt="Avatar"
-                            />
-                          </li>
-                          <li>
-                            <img
-                              src="assets/images/xs/avatar9.jpg"
-                              title="Avatar"
-                              alt="Avatar"
-                            />
-                          </li>
-                          <li>
-                            <img
-                              src="assets/images/xs/avatar8.jpg"
-                              title="Avatar"
-                              alt="Avatar"
-                            />
-                          </li>
-                        </ul>
-                        <div className="progress-container l-black m-b-20">
-                          <span className="progress-badge">Prograss</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="78"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                            >
-                              <span className="progress-value">78%</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-7">
-                            <h6>BUDGET: 2,170 USD</h6>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+          <div className="col-lg-12 col-md-12">
+            <div className="card">
+              <div className="body project_report">
+                <div className="table-responsive">
+                  <table className="table m-b-0 table-hover">
+                    <thead>
+                      <tr>
+                        <th>Status</th>
+                        <th>Project</th>
+                        <th>Prograss</th>
+                        <th>Team</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {projects.length === 0
+                        ? null
+                        : projects.map((p, i) => {
+                            return (
+                              <tr key={i}>
+                                <td>
+                                  <span className="badge badge-success">
+                                    Active
+                                  </span>
+                                </td>
+                                <td className="project-title">
+                                  <h6>
+                                    <Link to="/tasks">{p.Name}</Link>
+                                  </h6>
+                                  <small>Due date: {p.DueDate}</small>
+                                </td>{" "}
+                                <td>
+                                  <div className="progress">
+                                    <div
+                                      className="progress-bar l-dark"
+                                      role="progressbar"
+                                      aria-valuenow="48"
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                      style={{ width: "48%" }}
+                                    />
+                                  </div>
+                                  <small>Completion with: 48%</small>
+                                </td>
+                                <td>
+                                  <ul className="list-unstyled team-info">
+                                    <li>
+                                      <img
+                                        src="assets/images/xs/avatar1.jpg"
+                                        alt="Avatar"
+                                      />
+                                    </li>
+                                    <li>
+                                      <img
+                                        src="assets/images/xs/avatar2.jpg"
+                                        alt="Avatar"
+                                      />
+                                    </li>
+                                    <li>
+                                      <img
+                                        src="assets/images/xs/avatar3.jpg"
+                                        alt="Avatar"
+                                      />
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td className="project-actions">
+                                  <a
+                                    href="#"
+                                    className="btn btn-neutral btn-sm"
+                                  >
+                                    <i className="zmdi zmdi-eye" />
+                                  </a>
+                                  <a
+                                    href="#"
+                                    className="btn btn-neutral btn-sm"
+                                  >
+                                    <i className="zmdi zmdi-edit" />
+                                  </a>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
