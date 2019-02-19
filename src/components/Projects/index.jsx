@@ -48,7 +48,7 @@ const Projects = () => {
                       <tr>
                         <th>Status</th>
                         <th>Project</th>
-                        <th>Prograss</th>
+                        <th>Progress</th>
                         <th>Team</th>
                         <th>Action</th>
                       </tr>
