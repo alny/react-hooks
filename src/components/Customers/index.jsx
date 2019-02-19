@@ -31,21 +31,26 @@ const Customers = () => {
   };
 
   const createCustomer = async () => {
-    await axios.post("http://localhost:57422/api/customers/1", customer);
-    window.location.reload();
+    const response = await axios.post(
+      "http://localhost:57422/api/customers/1",
+      customer
+    );
+    setCustomers([...customers, response.data]);
   };
 
   const editCustomers = async () => {
-    await axios.put(
+    const response = await axios.put(
       `http://localhost:57422/api/customers/${customer.Id}`,
       customer
     );
-    window.location.reload();
+    const newCustomers = customers.filter(e => e.Id !== customer.Id);
+    setCustomers([...newCustomers, response.data]);
   };
 
   const deleteCustomer = async id => {
     await axios.delete(`http://localhost:57422/api/customers/${id}`);
-    window.location.reload();
+    const newCustomers = customers.filter(e => e.Id !== id);
+    setCustomers(newCustomers);
   };
 
   const handleInputChange = event => {

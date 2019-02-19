@@ -14,71 +14,79 @@ const Developers = () => {
     fetctDevelopers();
   }, []);
   return (
-    <section className="content profile-page">
-      <div className="container">
-        <div className="block-header">
-          <div className="row clearfix">
-            <div className="col-lg-5 col-md-5 col-sm-12">
+    <section class="content contact">
+      <div class="container">
+        <div class="block-header">
+          <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-12">
               <h2>Developers</h2>
+              <button className="btn btn-primary btn-sm">
+                Add New Developer
+              </button>
             </div>
-            <div className="col-lg-7 col-md-7 col-sm-12">
-              <ul className="breadcrumb float-md-right padding-0">
-                <li className="breadcrumb-item">
-                  <a href="#">
-                    <i className="zmdi zmdi-home" />
+            <div class="col-lg-7 col-md-7 col-sm-12">
+              <ul class="breadcrumb float-md-right padding-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html">
+                    <i class="zmdi zmdi-home" />
                   </a>
                 </li>
-                <li className="breadcrumb-item">
-                  <a href="#">Pages</a>
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0);">Dashboard</a>
                 </li>
-                <li className="breadcrumb-item active">Developers</li>
+                <li class="breadcrumb-item active">Developers</li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="row clearfix">
-          {developers.map((d, i) => {
-            return (
-              <div key={i} className="col-lg-12 col-md-12">
-                <Link to="/projects">
-                  <div className="card">
-                    <div className="body bg-dark profile-header">
-                      <div className="row">
-                        <div className="col-lg-10 col-md-12">
-                          <img
-                            src="https://www.rpnation.com/gallery/250-x-250-placeholder.30091/full"
-                            className="user_pic rounded img-raised"
-                            alt="User"
-                          />
-                          <div className="detail">
-                            <div className="u_name">
-                              <h4>
-                                <strong>{d.Name}</strong>
-                              </h4>
-                              <span>Full Stack Developer</span>
-                              <br />
-                              <span>Email: {d.Email}</span>
+        <div class="row clearfix">
+          <div class="col-lg-12">
+            <div class="tab-content">
+              <div class="tab-pane active" id="Grid">
+                <div class="row">
+                  {developers.map((d, i) => {
+                    return (
+                      <div key={i} class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                          <div class="body text-center">
+                            <div class="chart easy-pie-chart-1">
+                              {" "}
+                              <span>
+                                <img
+                                  src="http://kiwilandingpad.com/wp-content/uploads/2014/05/avatar-placeholder.png"
+                                  alt="user"
+                                  class="rounded-circle"
+                                />
+                              </span>{" "}
                             </div>
-                            <div id="m_area_chart" />
+                            <h6>{d.Name}</h6>
+                            <ul class="social-links list-unstyled">
+                              <li>
+                                <a title="facebook" href="#">
+                                  <i class="zmdi zmdi-facebook" />
+                                </a>
+                              </li>
+                              <li>
+                                <a title="twitter" href="#">
+                                  <i class="zmdi zmdi-twitter" />
+                                </a>
+                              </li>
+                              <li>
+                                <a title="instagram" href="javascript:void(0)">
+                                  <i class="zmdi zmdi-instagram" />
+                                </a>
+                              </li>
+                            </ul>
+                            <small>{d.Email}</small>
                           </div>
                         </div>
-                        <div className="col-lg-2 col-md-12 user_earnings">
-                          <h6>Total Earnings</h6>
-                          <h4>
-                            $<small className="number count-to">2124</small>
-                          </h4>
-                          <span>
-                            Average 39%{" "}
-                            <i className="zmdi zmdi-caret-up text-success" />
-                          </span>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                </Link>
+                    );
+                  })}
+                </div>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

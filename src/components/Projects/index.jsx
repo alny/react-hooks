@@ -22,6 +22,9 @@ const Projects = () => {
           <div className="row clearfix">
             <div className="col-lg-5 col-md-5 col-sm-12">
               <h2>Projects List</h2>
+              <button className="btn btn-primary btn-sm">
+                Add New Project
+              </button>
             </div>
             <div className="col-lg-7 col-md-7 col-sm-12">
               <ul className="breadcrumb float-md-right padding-0">
