@@ -14,7 +14,7 @@ const Developers = () => {
     fetctDevelopers();
   }, []);
   return (
-    <section className="content contact">
+    <section style={{ marginTop: "125px" }} className="content contact">
       <div className="container">
         <div className="block-header">
           <div className="row clearfix">

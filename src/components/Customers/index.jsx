@@ -247,7 +247,7 @@ const Customers = () => {
           </div>
         </div>
       </div>
-      <section className="content">
+      <section style={{ marginTop: "125px" }} className="content">
         <div className="container">
           <div className="block-header">
             <div className="row clearfix">
