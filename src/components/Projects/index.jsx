@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const Projects = () => {
+const Projects = props => {
+  console.log(props);
   const [projects, setProjects] = useState([]);
 
   const fetctProjects = async () => {
     const result = await axios(
-      "http://localhost:57422/api/customers/1/projects"
+      `http://localhost:57422/api/customers/${
+        props ? props.match.params.id : 1
+      }/projects`
     );
     setProjects(result.data);
-    console.log(result.data);
   };
 
   useEffect(() => {
@@ -22,9 +24,6 @@ const Projects = () => {
           <div className="row clearfix">
             <div className="col-lg-5 col-md-5 col-sm-12">
               <h2>Projects List</h2>
-              <button className="btn btn-primary btn-sm">
-                Add New Project
-              </button>
             </div>
             <div className="col-lg-7 col-md-7 col-sm-12">
               <ul className="breadcrumb float-md-right padding-0">
@@ -34,7 +33,7 @@ const Projects = () => {
                   </a>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="javascript:void(0);">Pages</a>
+                  <Link to="/customers">Customers</Link>
                 </li>
                 <li className="breadcrumb-item active">Projects List</li>
               </ul>
@@ -69,7 +68,7 @@ const Projects = () => {
                                 </td>
                                 <td className="project-title">
                                   <h6>
-                                    <Link to="/tasks">{p.Name}</Link>
+                                    <Link to={`/tasks/${p.Id}`}>{p.Name}</Link>
                                   </h6>
                                   <small>Due date: {p.DueDate}</small>
                                 </td>{" "}
@@ -90,19 +89,19 @@ const Projects = () => {
                                   <ul className="list-unstyled team-info">
                                     <li>
                                       <img
-                                        src="assets/images/xs/avatar1.jpg"
+                                        src="/assets/images/xs/avatar1.jpg"
                                         alt="Avatar"
                                       />
                                     </li>
                                     <li>
                                       <img
-                                        src="assets/images/xs/avatar2.jpg"
+                                        src="/assets/images/xs/avatar2.jpg"
                                         alt="Avatar"
                                       />
                                     </li>
                                     <li>
                                       <img
-                                        src="assets/images/xs/avatar3.jpg"
+                                        src="/assets/images/xs/avatar3.jpg"
                                         alt="Avatar"
                                       />
                                     </li>

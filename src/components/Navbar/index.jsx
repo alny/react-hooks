@@ -10,14 +10,16 @@ const Navbar = () => {
             <li>
               <div className="navbar-header">
                 <a href="#" className="h-bars" />
-                <a className="navbar-brand" href="#">
-                  <img
-                    src="assets/images/logo-black.svg"
-                    width="35"
-                    alt="Alpino"
-                  />
-                  <span className="m-l-10">Centisoft</span>
-                </a>
+                <Link to="/">
+                  <a className="navbar-brand" href="#">
+                    <img
+                      src="assets/images/logo-black.svg"
+                      width="35"
+                      alt="Alpino"
+                    />
+                    <span className="m-l-10">Centisoft</span>
+                  </a>
+                </Link>
               </div>
             </li>
             <li className="search_bar">
@@ -60,17 +62,13 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/">Dashboard</a>
+                  <Link to="/">Dashboard</Link>
                 </li>
-                <li>
-                  <Link to="/projects">Projects</Link>
-                </li>
-
                 <li>
                   <Link to="/developers">Developers</Link>
                 </li>
                 <li>
-                  <Link to="/customers">Customers</Link>
+                  <Link to="/customers">Edit</Link>
                 </li>
               </ul>
             </div>

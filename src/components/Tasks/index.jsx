@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Tasks = () => {
+const Tasks = props => {
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = async () => {
-    const result = await axios("http://localhost:57422/api/projects/1/tasks");
+    const result = await axios(
+      `http://localhost:57422/api/projects/${
+        props ? props.match.params.id : 1
+      }/tasks`
+    );
     setTasks(result.data);
-    console.log(result.data);
   };
 
   useEffect(() => {
@@ -44,38 +47,6 @@ const Tasks = () => {
                 <h2>
                   <strong>Projects Tasks</strong>
                 </h2>
-                <ul className="header-dropdown">
-                  <li className="dropdown">
-                    {" "}
-                    <a
-                      href="#"
-                      className="dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      {" "}
-                      <i className="zmdi zmdi-more" />{" "}
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-right">
-                      <li>
-                        <a href="#">Action</a>
-                      </li>
-                      <li>
-                        <a href="#">Another action</a>
-                      </li>
-                      <li>
-                        <a href="#">Something else</a>
-                      </li>
-                      <li>
-                        <a href="#" className="boxs-close">
-                          Delete
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
               </div>
               <div className="body">
                 <div className="row">

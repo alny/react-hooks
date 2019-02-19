@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
 const Customers = () => {
-  const initialFormState = {
+  var today = new Date();
+  const initialCustomerState = {
     Id: 0,
     Name: "",
     Email: "",
@@ -12,9 +16,20 @@ const Customers = () => {
     Zip: "",
     Phone: ""
   };
+  const initialProjectState = {
+    Id: 0,
+    Name: "",
+    DueDate: ""
+  };
+
+  const notifySuccess = () => toast.success("🧔 Customer Created!");
+  const notifyProjectSuccess = () => toast.success("🧔 Project Created!");
+  const notifyWarning = () => toast.warning("👴 Customer Deleted!");
 
   const [customers, setCustomers] = useState([]);
-  const [customer, setcustomer] = useState(initialFormState);
+  const [customer, setcustomer] = useState(initialCustomerState);
+  const [project, setProject] = useState(initialProjectState);
+
   const [editing, setEditing] = useState(false);
 
   const fetctCustomers = async () => {
@@ -35,7 +50,16 @@ const Customers = () => {
       "http://localhost:57422/api/customers/1",
       customer
     );
+    notifySuccess();
     setCustomers([...customers, response.data]);
+  };
+
+  const createProject = async () => {
+    const res = await axios.post(
+      `http://localhost:57422/api/customers/${project.Id}/projects`,
+      project
+    );
+    notifyProjectSuccess();
   };
 
   const editCustomers = async () => {
@@ -50,12 +74,18 @@ const Customers = () => {
   const deleteCustomer = async id => {
     await axios.delete(`http://localhost:57422/api/customers/${id}`);
     const newCustomers = customers.filter(e => e.Id !== id);
+    notifyWarning();
     setCustomers(newCustomers);
   };
 
-  const handleInputChange = event => {
+  const handleCustomerInputChange = event => {
     const { name, value } = event.target;
     setcustomer({ ...customer, [name]: value });
+  };
+
+  const handleProjectInputChange = event => {
+    const { name, value } = event.target;
+    setProject({ ...project, [name]: value });
   };
 
   useEffect(() => {
@@ -63,6 +93,45 @@ const Customers = () => {
   }, []);
   return (
     <>
+      <div className="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="title" id="defaultModalLabel">
+                Create Project
+              </h4>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <input
+                  onChange={handleProjectInputChange}
+                  type="text"
+                  className="form-control"
+                  name="Name"
+                  placeholder="Name"
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                onClick={() => createProject()}
+                type="button"
+                data-dismiss="modal"
+                className="btn btn-primary btn-round waves-effect"
+              >
+                Create
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger btn-simple btn-round waves-effect"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="modal fade" id="largeModal" tabindex="-1" role="dialog">
         <div className="modal-dialog modal-lg" role="document">
           <div className="modal-content">
@@ -72,76 +141,76 @@ const Customers = () => {
               </h4>
             </div>
             <div className="modal-body">
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Name}
                   type="text"
                   required
                   minLength="2"
-                  class="form-control"
+                  className="form-control"
                   name="Name"
                   placeholder="Name"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Email}
                   type="text"
                   required
                   minLength="3"
-                  class="form-control"
+                  className="form-control"
                   name="Email"
                   placeholder="Email"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Address}
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="Address"
                   placeholder="Address"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.City}
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="City"
                   placeholder="City"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Country}
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="Country"
                   placeholder="Country"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Zip}
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="Zip"
                   placeholder="Zip"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  onChange={handleInputChange}
+                  onChange={handleCustomerInputChange}
                   value={customer.Phone}
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="Phone"
                   placeholder="Phone"
                 />
@@ -191,7 +260,7 @@ const Customers = () => {
                 >
                   <button
                     onClick={() => (
-                      setEditing(false), setcustomer(initialFormState)
+                      setEditing(false), setcustomer(initialCustomerState)
                     )}
                     className="btn btn-primary btn-sm"
                   >
@@ -226,8 +295,30 @@ const Customers = () => {
                     >
                       <div className="card">
                         <div className="body">
-                          <Link to="/projects">
-                            <h6 className="m-b-15">{p.Name}</h6>
+                          <Link to={`/projects/${p.Id}`}>
+                            <h6 className="m-b-15">
+                              <ul
+                                style={{ marginTop: "-5px" }}
+                                className="list-unstyled team-info m-t-20"
+                              >
+                                <li>
+                                  <li
+                                    style={{
+                                      marginRight: "15px",
+                                      color: "black"
+                                    }}
+                                  >
+                                    {p.Name}{" "}
+                                  </li>
+                                  <img
+                                    style={{ height: "40px", width: "40px" }}
+                                    src="https://www.ucn.dk/Files/Billeder/ucn/Om-UCN/Presse/DG-Logo-Bom%C3%A6rke.jpg"
+                                    title="Avatar"
+                                    alt="Avatar"
+                                  />
+                                </li>
+                              </ul>
+                            </h6>
                           </Link>
                           <p>Customer ID: {p.Id}</p>
                           <p>Adresse: {p.Address}</p>
@@ -236,37 +327,21 @@ const Customers = () => {
                           <p>Email: {p.Email}</p>
                           <p>Phone: {p.Phone}</p>
 
-                          <ul className="list-unstyled team-info m-t-20">
-                            <li className="m-r-15">
-                              <small className="text-muted">
-                                Customer Image:
-                              </small>
-                            </li>
-                            <li>
-                              <img
-                                src="assets/images/xs/avatar10.jpg"
-                                title="Avatar"
-                                alt="Avatar"
-                              />
-                            </li>
-                          </ul>
-                          <div className="progress-container l-black m-b-20">
-                            <span className="progress-badge">Progress</span>
-                            <div className="progress">
-                              <div
-                                className="progress-bar"
-                                role="progressbar"
-                                aria-valuenow="78"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              >
-                                <span className="progress-value">78%</span>
-                              </div>
-                            </div>
-                          </div>
                           <div className="row">
                             <div className="col-7">
-                              <h6>BUDGET: 2,170 USD</h6>
+                              <button
+                                data-toggle="modal"
+                                data-target="#defaultModal"
+                                onClick={() =>
+                                  setProject({
+                                    Id: p.Id,
+                                    DueDate: today
+                                  })
+                                }
+                                className="btn btn-primary btn-sm"
+                              >
+                                Add Project
+                              </button>
                             </div>
                             <a
                               href="#largeModal"
@@ -275,14 +350,14 @@ const Customers = () => {
                             >
                               <button
                                 onClick={() => fetctSingleCustomer(p.Id)}
-                                class="btn btn-primary btn-sm"
+                                className="btn btn-primary btn-sm"
                               >
                                 Edit
                               </button>
                             </a>
                             <button
                               onClick={() => deleteCustomer(p.Id)}
-                              class="btn btn-primary btn-sm"
+                              className="btn btn-primary btn-sm"
                             >
                               Delete
                             </button>
@@ -295,6 +370,7 @@ const Customers = () => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };

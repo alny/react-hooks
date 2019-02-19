@@ -15,8 +15,8 @@ const Routes = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Dashboard} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/tasks" component={Tasks} />
+          <Route path="/projects/:id" component={Projects} />
+          <Route path="/tasks/:id" component={Tasks} />
           <Route path="/developers" component={Developers} />
           <Route path="/customers" component={Customers} />
           <Route component={() => <div>Not Found</div>} />

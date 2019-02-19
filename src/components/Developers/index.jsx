@@ -14,66 +14,66 @@ const Developers = () => {
     fetctDevelopers();
   }, []);
   return (
-    <section class="content contact">
-      <div class="container">
-        <div class="block-header">
-          <div class="row clearfix">
-            <div class="col-lg-5 col-md-5 col-sm-12">
+    <section className="content contact">
+      <div className="container">
+        <div className="block-header">
+          <div className="row clearfix">
+            <div className="col-lg-5 col-md-5 col-sm-12">
               <h2>Developers</h2>
               <button className="btn btn-primary btn-sm">
                 Add New Developer
               </button>
             </div>
-            <div class="col-lg-7 col-md-7 col-sm-12">
-              <ul class="breadcrumb float-md-right padding-0">
-                <li class="breadcrumb-item">
+            <div className="col-lg-7 col-md-7 col-sm-12">
+              <ul className="breadcrumb float-md-right padding-0">
+                <li className="breadcrumb-item">
                   <a href="index.html">
-                    <i class="zmdi zmdi-home" />
+                    <i className="zmdi zmdi-home" />
                   </a>
                 </li>
-                <li class="breadcrumb-item">
+                <li className="breadcrumb-item">
                   <a href="javascript:void(0);">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Developers</li>
+                <li className="breadcrumb-item active">Developers</li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="row clearfix">
-          <div class="col-lg-12">
-            <div class="tab-content">
-              <div class="tab-pane active" id="Grid">
-                <div class="row">
+        <div className="row clearfix">
+          <div className="col-lg-12">
+            <div className="tab-content">
+              <div className="tab-pane active" id="Grid">
+                <div className="row">
                   {developers.map((d, i) => {
                     return (
-                      <div key={i} class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="card">
-                          <div class="body text-center">
-                            <div class="chart easy-pie-chart-1">
+                      <div key={i} className="col-lg-3 col-md-6 col-sm-12">
+                        <div className="card">
+                          <div className="body text-center">
+                            <div className="chart easy-pie-chart-1">
                               {" "}
                               <span>
                                 <img
                                   src="http://kiwilandingpad.com/wp-content/uploads/2014/05/avatar-placeholder.png"
                                   alt="user"
-                                  class="rounded-circle"
+                                  className="rounded-circle"
                                 />
                               </span>{" "}
                             </div>
                             <h6>{d.Name}</h6>
-                            <ul class="social-links list-unstyled">
+                            <ul className="social-links list-unstyled">
                               <li>
                                 <a title="facebook" href="#">
-                                  <i class="zmdi zmdi-facebook" />
+                                  <i className="zmdi zmdi-facebook" />
                                 </a>
                               </li>
                               <li>
                                 <a title="twitter" href="#">
-                                  <i class="zmdi zmdi-twitter" />
+                                  <i className="zmdi zmdi-twitter" />
                                 </a>
                               </li>
                               <li>
                                 <a title="instagram" href="javascript:void(0)">
-                                  <i class="zmdi zmdi-instagram" />
+                                  <i className="zmdi zmdi-instagram" />
                                 </a>
                               </li>
                             </ul>
