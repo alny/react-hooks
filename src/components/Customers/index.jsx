@@ -15,6 +15,7 @@ const Customers = () => {
 
   const [customers, setCustomers] = useState([]);
   const [customer, setcustomer] = useState(initialFormState);
+  const [editing, setEditing] = useState(false);
 
   const fetctCustomers = async () => {
     const result = await axios("http://localhost:57422/api/customers");
@@ -22,6 +23,7 @@ const Customers = () => {
   };
 
   const fetctSingleCustomer = async id => {
+    setEditing(true);
     const response = await axios.get(
       `http://localhost:57422/api/customers/${id}`
     );
@@ -48,9 +50,7 @@ const Customers = () => {
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-
     setcustomer({ ...customer, [name]: value });
-    console.log(customer);
   };
 
   useEffect(() => {
@@ -143,22 +143,25 @@ const Customers = () => {
               </div>
             </div>
             <div className="modal-footer">
-              <button
-                onClick={() => createCustomer()}
-                data-dismiss="modal"
-                type="button"
-                className="btn btn-default btn-round waves-effect"
-              >
-                Create
-              </button>
-              <button
-                type="button"
-                onClick={() => editCustomers()}
-                className="btn btn-danger btn-simple btn-round waves-effect"
-                data-dismiss="modal"
-              >
-                Save Edit
-              </button>
+              {!editing ? (
+                <button
+                  onClick={() => createCustomer()}
+                  data-dismiss="modal"
+                  type="button"
+                  className="btn btn-default btn-round waves-effect"
+                >
+                  Create
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => editCustomers()}
+                  className="btn btn-danger btn-simple btn-round waves-effect"
+                  data-dismiss="modal"
+                >
+                  Save Edit
+                </button>
+              )}
               <button
                 type="button"
                 className="btn btn-danger btn-simple btn-round waves-effect"
@@ -181,7 +184,12 @@ const Customers = () => {
                   data-toggle="modal"
                   data-target="#largeModal"
                 >
-                  <button className="btn btn-primary btn-sm">
+                  <button
+                    onClick={() => (
+                      setEditing(false), setcustomer(initialFormState)
+                    )}
+                    className="btn btn-primary btn-sm"
+                  >
                     Add New Customer
                   </button>
                 </a>
@@ -215,13 +223,14 @@ const Customers = () => {
                         <div className="body">
                           <Link to="/projects">
                             <h6 className="m-b-15">{p.Name}</h6>
-                            <p>Customer ID: {p.Id}</p>
-                            <p>Adresse: {p.Address}</p>
-                            <p>Post Nr: {p.Zip}</p>
-                            <p>By: {p.City}</p>
-                            <p>Email: {p.Email}</p>
-                            <p>Phone: {p.Phone}</p>
                           </Link>
+                          <p>Customer ID: {p.Id}</p>
+                          <p>Adresse: {p.Address}</p>
+                          <p>Post Nr: {p.Zip}</p>
+                          <p>By: {p.City}</p>
+                          <p>Email: {p.Email}</p>
+                          <p>Phone: {p.Phone}</p>
+
                           <ul className="list-unstyled team-info m-t-20">
                             <li className="m-r-15">
                               <small className="text-muted">
