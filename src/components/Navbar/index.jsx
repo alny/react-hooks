@@ -67,10 +67,13 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a href="#">Developers</a>
+                  <Link to="/developers">Developers</Link>
                 </li>
                 <li>
                   <a href="#">Customers</a>
+                </li>
+                <li>
+                  <Link to="/tasks">Tasks</Link>
                 </li>
               </ul>
             </div>
