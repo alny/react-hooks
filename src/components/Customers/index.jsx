@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 const Customers = () => {
   const initialFormState = {
+    Id: 0,
     Name: "",
     Email: "",
     Address: "",
@@ -20,11 +21,29 @@ const Customers = () => {
     setCustomers(result.data);
   };
 
+  const fetctSingleCustomer = async id => {
+    const response = await axios.get(
+      `http://localhost:57422/api/customers/${id}`
+    );
+    setcustomer({ ...response.data, Id: id });
+  };
+
   const createCustomer = async () => {
-    const result = await axios.post(
-      "http://localhost:57422/api/customers/1",
+    await axios.post("http://localhost:57422/api/customers/1", customer);
+    window.location.reload();
+  };
+
+  const editCustomers = async () => {
+    await axios.put(
+      `http://localhost:57422/api/customers/${customer.Id}`,
       customer
     );
+    window.location.reload();
+  };
+
+  const deleteCustomer = async id => {
+    await axios.delete(`http://localhost:57422/api/customers/${id}`);
+    window.location.reload();
   };
 
   const handleInputChange = event => {
@@ -53,6 +72,8 @@ const Customers = () => {
                   onChange={handleInputChange}
                   value={customer.Name}
                   type="text"
+                  required
+                  minLength="2"
                   class="form-control"
                   name="Name"
                   placeholder="Name"
@@ -63,6 +84,8 @@ const Customers = () => {
                   onChange={handleInputChange}
                   value={customer.Email}
                   type="text"
+                  required
+                  minLength="3"
                   class="form-control"
                   name="Email"
                   placeholder="Email"
@@ -130,6 +153,14 @@ const Customers = () => {
               </button>
               <button
                 type="button"
+                onClick={() => editCustomers()}
+                className="btn btn-danger btn-simple btn-round waves-effect"
+                data-dismiss="modal"
+              >
+                Save Edit
+              </button>
+              <button
+                type="button"
                 className="btn btn-danger btn-simple btn-round waves-effect"
                 data-dismiss="modal"
               >
@@ -180,9 +211,9 @@ const Customers = () => {
                       key={i}
                       className="col-xl-4 col-lg-6 col-md-6 col-sm-12"
                     >
-                      <Link to="/projects">
-                        <div className="card">
-                          <div className="body">
+                      <div className="card">
+                        <div className="body">
+                          <Link to="/projects">
                             <h6 className="m-b-15">{p.Name}</h6>
                             <p>Customer ID: {p.Id}</p>
                             <p>Adresse: {p.Address}</p>
@@ -190,43 +221,60 @@ const Customers = () => {
                             <p>By: {p.City}</p>
                             <p>Email: {p.Email}</p>
                             <p>Phone: {p.Phone}</p>
-
-                            <ul className="list-unstyled team-info m-t-20">
-                              <li className="m-r-15">
-                                <small className="text-muted">
-                                  Customer Image:
-                                </small>
-                              </li>
-                              <li>
-                                <img
-                                  src="assets/images/xs/avatar10.jpg"
-                                  title="Avatar"
-                                  alt="Avatar"
-                                />
-                              </li>
-                            </ul>
-                            <div className="progress-container l-black m-b-20">
-                              <span className="progress-badge">Progress</span>
-                              <div className="progress">
-                                <div
-                                  className="progress-bar"
-                                  role="progressbar"
-                                  aria-valuenow="78"
-                                  aria-valuemin="0"
-                                  aria-valuemax="100"
-                                >
-                                  <span className="progress-value">78%</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col-7">
-                                <h6>BUDGET: 2,170 USD</h6>
+                          </Link>
+                          <ul className="list-unstyled team-info m-t-20">
+                            <li className="m-r-15">
+                              <small className="text-muted">
+                                Customer Image:
+                              </small>
+                            </li>
+                            <li>
+                              <img
+                                src="assets/images/xs/avatar10.jpg"
+                                title="Avatar"
+                                alt="Avatar"
+                              />
+                            </li>
+                          </ul>
+                          <div className="progress-container l-black m-b-20">
+                            <span className="progress-badge">Progress</span>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow="78"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <span className="progress-value">78%</span>
                               </div>
                             </div>
                           </div>
+                          <div className="row">
+                            <div className="col-7">
+                              <h6>BUDGET: 2,170 USD</h6>
+                            </div>
+                            <a
+                              href="#largeModal"
+                              data-toggle="modal"
+                              data-target="#largeModal"
+                            >
+                              <button
+                                onClick={() => fetctSingleCustomer(p.Id)}
+                                class="btn btn-primary btn-sm"
+                              >
+                                Edit
+                              </button>
+                            </a>
+                            <button
+                              onClick={() => deleteCustomer(p.Id)}
+                              class="btn btn-primary btn-sm"
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </div>
-                      </Link>
+                      </div>
                     </div>
                   );
                 })}
