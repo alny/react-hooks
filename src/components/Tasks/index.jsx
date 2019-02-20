@@ -18,7 +18,7 @@ const Tasks = props => {
   }, []);
 
   return (
-    <section className="content">
+    <section style={{ marginTop: "125px" }} className="content">
       <div className="container">
         <div className="block-header">
           <div className="row clearfix">
@@ -50,12 +50,7 @@ const Tasks = props => {
               </div>
               <div className="body">
                 <div className="row">
-                  <div className="col-md-12">
-                    <button className="btn btn-default pull-right add-row">
-                      <i className="fa fa-plus" />
-                      &nbsp;&nbsp; Add Task
-                    </button>
-                  </div>
+                  <div className="col-md-12" />
                 </div>
                 <div className="row">
                   <div className="col-md-12">
@@ -85,13 +80,16 @@ const Tasks = props => {
                                   <td data-field="createdAt">{t.Created}</td>
                                   <td>
                                     <a
+                                      href="#"
                                       className="button button-small edit"
                                       title="Edit"
+                                      style={{ marginRight: "10px" }}
                                     >
                                       <i className="zmdi zmdi-edit" />
                                     </a>
 
                                     <a
+                                      href="#"
                                       className="button button-small edit"
                                       title="Delete"
                                     >

@@ -13,7 +13,7 @@ const Navbar = () => {
                 <Link to="/">
                   <a className="navbar-brand" href="#">
                     <img
-                      src="assets/images/logo-black.svg"
+                      src="/assets/images/logo-black.svg"
                       width="35"
                       alt="Alpino"
                     />

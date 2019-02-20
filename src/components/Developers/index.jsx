@@ -4,8 +4,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-const notifySuccess = () => toast.success("🧔 Developer Created!");
-const notifyWarning = () => toast.warning("👴 Developer Deleted!");
+const notifySuccess = () => toast.success("Developer Created!");
+const notifyEdit = () => toast.success("Developer has been edited!");
+const notifyWarning = () => toast.warning("Developer Deleted!");
 
 const Developers = () => {
   const initialDeveloperState = {
@@ -47,6 +48,7 @@ const Developers = () => {
     );
     const newDevelopers = developers.filter(e => e.Id !== devId);
     setDevelopers([...newDevelopers, response.data]);
+    notifyEdit();
   };
 
   const handleInputChange = event => {
@@ -99,7 +101,7 @@ const Developers = () => {
                 Create
               </button>
               <button
-                onClick={() => createDeveloper()}
+                onClick={() => editDeveloper()}
                 type="button"
                 data-dismiss="modal"
                 className="btn btn-primary btn-round waves-effect"
@@ -107,7 +109,7 @@ const Developers = () => {
                 Edit
               </button>
               <button
-                onClick={() => editDeveloper()}
+                onClick={() => deleteDeveloper()}
                 type="button"
                 data-dismiss="modal"
                 className="btn btn-primary btn-round waves-effect"
@@ -181,6 +183,10 @@ const Developers = () => {
                                   </span>{" "}
                                 </div>
                                 <h6>{d.Name}</h6>
+                                <p>
+                                  Developer Id: <b>{d.Id}</b>
+                                </p>
+
                                 <ul className="social-links list-unstyled">
                                   <li>
                                     <a title="facebook" href="#">

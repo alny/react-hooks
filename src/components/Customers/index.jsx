@@ -22,9 +22,9 @@ const Customers = () => {
     DueDate: ""
   };
 
-  const notifySuccess = () => toast.success("🧔 Customer Created!");
-  const notifyProjectSuccess = () => toast.success("🧔 Project Created!");
-  const notifyWarning = () => toast.warning("👴 Customer Deleted!");
+  const notifySuccess = () => toast.success("Customer Created!");
+  const notifyProjectSuccess = () => toast.success("Project Created!");
+  const notifyWarning = () => toast.warning("Customer Deleted!");
 
   const [customers, setCustomers] = useState([]);
   const [customer, setcustomer] = useState(initialCustomerState);
