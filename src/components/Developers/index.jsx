@@ -4,9 +4,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-const notifySuccess = () => toast.success("Developer Created!");
-const notifyEdit = () => toast.success("Developer has been edited!");
-const notifyWarning = () => toast.warning("Developer Deleted!");
+const notifySuccess = () => toast.success("✔️ Developer Created!");
+const notifyEdit = () => toast.success("✔️ Developer has been edited!");
+const notifyWarning = () => toast.warning("🗑️ Developer Deleted!");
 
 const Developers = () => {
   const initialDeveloperState = {
